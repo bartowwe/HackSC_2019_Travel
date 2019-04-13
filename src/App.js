@@ -7,8 +7,8 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <Route path="/home" component={Home} />
-        <Redirect from="/" exact to="/home" />
+        <Route path="/" component={Home} />
+        <Redirect from="/" exact to="/" />
         <Redirect to="/not-found" />
       </Switch>
     );
