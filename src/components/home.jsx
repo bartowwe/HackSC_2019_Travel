@@ -7,11 +7,7 @@ const google = window.google;
 const $ = window.$;
 let geocoder = new google.maps.Geocoder();
 
-
-
-
 class App extends React.Component {
-
 
     constructor(props) {
         super(props)

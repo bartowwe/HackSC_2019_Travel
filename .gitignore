@@ -1,0 +1,4 @@
+build/*
+Client/*
+node_modeule/*
+.DS_Store
