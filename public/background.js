@@ -1,4 +1,4 @@
-
+/*
 var colors = new Array(
   [108, 78, 156],
   [28, 7, 89],
@@ -54,3 +54,4 @@ function updateGradient() {
 document.addEventListener("DOMContentLoaded", function() {
   setInterval(updateGradient, 10);
 });
+*/
