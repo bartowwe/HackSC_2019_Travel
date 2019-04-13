@@ -25,7 +25,6 @@ class App extends React.Component {
       destLat: "",
       destLong: "",
     };
-    this.comparePrices = this.comparePrices.bind(this);
     this.initializeMap = this.initializeMap.bind(this);
     this.checkPrice = this.checkPrice.bind(this);
   }
@@ -55,28 +54,39 @@ class App extends React.Component {
     var dest = document.getElementById('destField');
     var initial = document.getElementById('initField');
 
-
+    //HERE WE CAN PLUG IN THE THE LOC FOR DIRECTIONS
 
     // Get geocoder instance
 
-    let comparePrices = this.comparePrices.bind(this);
-    // Geocode the address
-    geocoder.geocode({
-      'address': dest.value
-    }, function (results, status) {
-      if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
-        //define results
-        let destLat = results[0].geometry.location.lat();
-        let destLong = results[0].geometry.location.lng();
-        //recurse with init
+
+    /*
+        // Geocode the address
         geocoder.geocode({
-          'address': initial.value
+          'address': dest.value
         }, function (results, status) {
           if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
             //define results
-            let startLat = results[0].geometry.location.lat();
-            let startLong = results[0].geometry.location.lng();
-            comparePrices(startLat, startLong, destLat, destLong);
+            let destLat = results[0].geometry.location.lat();
+            let destLong = results[0].geometry.location.lng();
+            //recurse with init
+            geocoder.geocode({
+              'address': initial.value
+            }, function (results, status) {
+              if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+                //define results
+                let startLat = results[0].geometry.location.lat();
+                let startLong = results[0].geometry.location.lng();
+
+                //here is where we could use the lat/long to get a route
+
+
+                // show an error if it's not
+              } else {
+                alert("Error with destination field! Please try again and make sure the address is valid!");
+                console.log(status);
+                console.log(results);
+              }
+            });
             // show an error if it's not
           } else {
             alert("Error with destination field! Please try again and make sure the address is valid!");
@@ -84,32 +94,9 @@ class App extends React.Component {
             console.log(results);
           }
         });
-        // show an error if it's not
-      } else {
-        alert("Error with destination field! Please try again and make sure the address is valid!");
-        console.log(status);
-        console.log(results);
-      }
-    });
+    */
 
   }
-
-  comparePrices(startLat, startLong, destLat, destLong) {
-    console.log('hello')
-    axios.post('/search', {
-      startLatitude: startLat,
-      startLongitude: startLong,
-      endLatitude: destLat,
-      endLongitude: destLong
-    })
-      .then(res => {
-
-      })
-      .catch(err => { console.error(err) });
-  }
-
-
-
 
   render() {
     return (
