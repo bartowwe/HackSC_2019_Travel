@@ -1,0 +1,42 @@
+body {
+	font-family: "AvenirNext-UltraLight", Sans-Serif;
+	font-size: 10px;
+	position: relative;
+	height: 100vh;
+	background: #FFFC00;
+}
+
+@font-face {
+  font-family: "Avenir";
+  src: url("media/fonts/AvenirNextPro.tff");
+}
+h1 { font-family: "AvenirNext", sans-serif }
+
+.login_form {
+	background: black;
+}
+
+.btnlogin {
+	border-top-right-radius: 45px;
+	border-top-left-radius: 45px;
+	border-bottom-right-radius: 45px;
+	border-bottom-left-radius: 45px;
+	font-size: 17px;
+	font-stretch: 100%;
+	font-weight: 400;
+	letter-spacing: 0.1px;
+	line-height: 22.1px;
+	color: white;
+	width: 222px;
+	vertical-align: middle;
+	white-space: nowrap;
+	text-align: center;
+	position: relative;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	min-width: 60px;
+	background-color: rgb(14, 173, 255);
+	display: block;
+}
