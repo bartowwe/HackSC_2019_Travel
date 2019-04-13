@@ -21,6 +21,7 @@
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "google-maps-react": "^2.0.2",
     "helmet": "^3.14.0",
     "nodemon": "^1.18.4",
     "path": "^0.12.7",
