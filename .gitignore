@@ -1,4 +1,4 @@
 build/*
 Client/*
-node_modeule/*
+node_module/*
 .DS_Store
