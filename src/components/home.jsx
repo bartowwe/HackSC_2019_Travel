@@ -14,6 +14,11 @@ import {
 const google = window.google;
 const $ = window.$;
 let geocoder = new google.maps.Geocoder();
+var directionsService = new google.maps.DirectionsService;
+var directionsDisplay = new google.maps.DirectionsRenderer;
+
+var dest;
+var initial;
 
 class App extends React.Component {
 
@@ -26,7 +31,7 @@ class App extends React.Component {
       destLong: "",
     };
     this.initializeMap = this.initializeMap.bind(this);
-    this.checkPrice = this.checkPrice.bind(this);
+    this.calculateAndDisplayRoute = this.calculateAndDisplayRoute.bind(this);
   }
 
   componentDidMount() {
@@ -35,31 +40,30 @@ class App extends React.Component {
 
   initializeMap() {
     function autocompleteStartLocation() {
-      var dest = document.getElementById('destField');
+       dest = document.getElementById('destField');
       var autocomplete = new google.maps.places.Autocomplete(dest);
     }
 
     function autocompleteDestination() {
-      var initial = document.getElementById('initField');
+       initial = document.getElementById('initField');
       var autocomplete = new google.maps.places.Autocomplete(initial);
     }
 
     google.maps.event.addDomListener(window, 'load', autocompleteStartLocation);
     google.maps.event.addDomListener(window, 'load', autocompleteDestination);
+
+    // var chicago = new google.maps.LatLng(41.850033, -87.6500523);
+    // //for directions
+    // var mapOptions = {
+    //   zoom:7,
+    //   center: chicago
+    // }
+    // var map = new google.maps.Map(document.getElementsByClassName('map'), mapOptions);
+    directionsDisplay.setMap(document.getElementsByClassName('map'));
   }
 
-  checkPrice() {
-    $('.spinner').css('display', 'inline-block');
-
-    var dest = document.getElementById('destField');
-    var initial = document.getElementById('initField');
-
-    //HERE WE CAN PLUG IN THE THE LOC FOR DIRECTIONS
-
-    // Get geocoder instance
-
-
-    /*
+  calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    //geocode
         // Geocode the address
         geocoder.geocode({
           'address': dest.value
@@ -77,7 +81,23 @@ class App extends React.Component {
                 let startLat = results[0].geometry.location.lat();
                 let startLong = results[0].geometry.location.lng();
 
+                console.log(startLat, startLong, destLat, destLong);
+
                 //here is where we could use the lat/long to get a route
+                directionsService.route({
+                  origin: {lat: startLat, lng: startLong},
+                  destination: {lat: destLat, lng: destLong},
+                  travelMode: 'DRIVING'
+                }, function(response, status) {
+                  if (status === 'OK') {
+                    console.log('directions okay', response);
+                    directionsDisplay.setDirections(response);
+                    directionsDisplay.setMap(document.getElementById('map'));
+
+                  } else {
+                    window.alert('Directions request failed due to ' + status);
+                  }
+                });
 
 
                 // show an error if it's not
@@ -94,8 +114,7 @@ class App extends React.Component {
             console.log(results);
           }
         });
-    */
-
+    //end geocode
   }
 
   render() {
@@ -106,7 +125,7 @@ class App extends React.Component {
           <input className="searchBar" id="initField" type="text" />
           <label htmlFor="destField">Destination</label>
           <input className="searchBar" id="destField" type="text" />
-          <button className="btn btn-default" id="search" onClick={this.checkPrice}>Check Route!</button>
+          <button className="btn btn-default" id="search" onClick={() => {this.calculateAndDisplayRoute(directionsService,directionsDisplay)}}>Check Route!</button>
           <span className="spinner">
             <span className="double-bounce1"></span>
             <span className="double-bounce2"></span>
@@ -116,10 +135,12 @@ class App extends React.Component {
         <Map
           centerAroundCurrentLocation
           className="map"
+          id="map"
           google={google}
           style={{ height: '100%', position: 'relative', width: '100%' }}
           zoom={14}
         />
+
       </div>
 
     )
