@@ -1,24 +1,19 @@
 import React from 'react';
 import axios from 'axios';
-import { places, GeoCoder, Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-import {
-  Redirect,
-  Switch,
-  Link,
-  Route,
-  BrowserRouter as Router
-} from 'react-router-dom';
-
-
+import { places, GeoCoder, Map, InfoWindow, Marker, GoogleApiWrapper, MapDirections } from 'google-maps-react';
 
 const google = window.google;
 const $ = window.$;
 let geocoder = new google.maps.Geocoder();
+<<<<<<< HEAD
 var directionsService = new google.maps.DirectionsService;
 var directionsDisplay = new google.maps.DirectionsRenderer;
 
 var dest;
 var initial;
+=======
+const GOOGLE_MAPS_APIKEY = 'AIzaSyBU0az33dTdv2Z655ieXC4NVk7Bm_N9d2g';
+>>>>>>> af43414a4240c971fe1bff83583c87502028ca07
 
 class App extends React.Component {
 
@@ -138,9 +133,15 @@ class App extends React.Component {
           id="map"
           google={google}
           style={{ height: '100%', position: 'relative', width: '100%' }}
+<<<<<<< HEAD
           zoom={14}
         />
 
+=======
+          zoom={14}>
+                    {/*<MapDirections strokeWidth={3} strokeColor="hotpink" apikey={GOOGLE_MAPS_APIKEY}/>*/}
+        </Map> 
+>>>>>>> af43414a4240c971fe1bff83583c87502028ca07
       </div>
 
     )
